@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "parcel_delivery_quality"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c3623cda-695d-4c38-8ee2-80ee37fd22f4"
+  }
+}

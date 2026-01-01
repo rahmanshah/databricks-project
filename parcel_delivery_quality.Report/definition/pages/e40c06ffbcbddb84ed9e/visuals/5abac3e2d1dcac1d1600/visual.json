@@ -1,0 +1,154 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "5abac3e2d1dcac1d1600",
+  "position": {
+    "x": 389.70971038040841,
+    "y": 264.8379369838691,
+    "z": 3,
+    "height": 284.04897904487513,
+    "width": 518.69813564716333,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_parcel_delivery_quality"
+                    }
+                  },
+                  "Property": "product"
+                }
+              },
+              "queryRef": "gold_parcel_delivery_quality.product",
+              "nativeQueryRef": "product",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_parcel_delivery_quality"
+                    }
+                  },
+                  "Property": "delivery_status"
+                }
+              },
+              "queryRef": "gold_parcel_delivery_quality.delivery_status",
+              "nativeQueryRef": "delivery_status"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "gold_parcel_delivery_quality"
+                        }
+                      },
+                      "Property": "transaction_ref"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(gold_parcel_delivery_quality.transaction_ref)",
+              "nativeQueryRef": "transaction_ref"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "gold_parcel_delivery_quality"
+                      }
+                    },
+                    "Property": "transaction_ref"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "91fc34601265006971ef",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_parcel_delivery_quality"
+              }
+            },
+            "Property": "product"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e6bb8d0d42b57951186a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_parcel_delivery_quality"
+              }
+            },
+            "Property": "delivery_status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "46419df44f9d265e02ac",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_parcel_delivery_quality"
+                  }
+                },
+                "Property": "transaction_ref"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

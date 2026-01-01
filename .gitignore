@@ -1,0 +1,7 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix
+.pbi/
+localsettings.json
+*.log
+**/connections.json

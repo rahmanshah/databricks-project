@@ -1,0 +1,23 @@
+table dim_product
+	lineageTag: a86f307c-7996-41fb-9355-b4d1be4cf4ae
+
+	column product_id
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 04dbf1ff-4fd4-4c2e-b882-45437054b166
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-ffb2734f-3900.cloud.databricks.com", "/sql/1.0/warehouses/f9889b398405ad31", [Catalog = "", Database = ""]),
+				    postnord_Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				    default_Schema = postnord_Database{[Name="default",Kind="Schema"]}[Data],
+				    dim_product_Table = default_Schema{[Name="dim_product",Kind="Table"]}[Data]
+				in
+				    dim_product_Table
+

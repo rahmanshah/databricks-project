@@ -1,0 +1,24 @@
+table dim_transaction_ref
+	lineageTag: 0ec22b55-e009-4606-93f5-d418418b5093
+
+	column transaction_ref_id
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 647ea3c3-6a60-4841-b3e4-77db829634ba
+		summarizeBy: none
+		sourceColumn: transaction_ref_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_transaction_ref = m
+		mode: directQuery
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-ffb2734f-3900.cloud.databricks.com", "/sql/1.0/warehouses/f9889b398405ad31", [Catalog = "", Database = ""]),
+				    postnord_Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				    default_Schema = postnord_Database{[Name="default",Kind="Schema"]}[Data],
+				    dim_transaction_ref_Table = default_Schema{[Name="dim_transaction_ref",Kind="Table"]}[Data]
+				in
+				    dim_transaction_ref_Table
+
