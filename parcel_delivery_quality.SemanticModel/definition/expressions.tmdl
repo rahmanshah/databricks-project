@@ -1,0 +1,4 @@
+expression ServerHostname = "dbc-ffb2734f-3900.cloud.databricks.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+
+expression HTTPPath = "/sql/1.0/warehouses/f9889b398405ad31" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+

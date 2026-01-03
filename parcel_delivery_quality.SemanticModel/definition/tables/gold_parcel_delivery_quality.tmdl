@@ -1,0 +1,52 @@
+table gold_parcel_delivery_quality
+
+	column packageid
+		dataType: string
+		sourceColumn: packageid
+
+	column systemdato
+		dataType: dateTime
+		sourceColumn: systemdato
+
+	column Terminal
+		dataType: string
+		sourceColumn: Terminal
+
+	column ETA
+		dataType: dateTime
+		sourceColumn: ETA
+
+	column created_dt
+		dataType: dateTime
+		sourceColumn: created_dt
+
+	column product
+		dataType: string
+		sourceColumn: product
+
+	column transaction_ref
+		dataType: int64
+		sourceColumn: transaction_ref
+
+	column end_time
+		dataType: dateTime
+		sourceColumn: end_time
+
+	column delivery_status
+		dataType: string
+		sourceColumn: delivery_status
+
+	partition gold_parcel_delivery_quality = m
+		mode: directQuery
+		source = ```
+				
+				            let
+				                Source = DatabricksMultiCloud.Catalogs(ServerHostname, HTTPPath, [Catalog=null, Database=null,
+				                    EnableAutomaticProxyDiscovery=null, EnableQueryResultDownload="1"]),
+				                Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				                Schema = Database{[Name="default",Kind="Schema"]}[Data],
+				                Table = Schema{[Name="gold_parcel_delivery_quality",Kind="Table"]}[Data]
+				            in
+				                Table
+				```
+

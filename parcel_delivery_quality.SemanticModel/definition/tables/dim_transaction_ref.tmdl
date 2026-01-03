@@ -1,0 +1,20 @@
+table dim_transaction_ref
+
+	column transaction_ref_id
+		dataType: int64
+		sourceColumn: transaction_ref_id
+
+	partition dim_transaction_ref = m
+		mode: directQuery
+		source = ```
+				
+				            let
+				                Source = DatabricksMultiCloud.Catalogs(ServerHostname, HTTPPath, [Catalog=null, Database=null,
+				                    EnableAutomaticProxyDiscovery=null, EnableQueryResultDownload="1"]),
+				                Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				                Schema = Database{[Name="default",Kind="Schema"]}[Data],
+				                Table = Schema{[Name="dim_transaction_ref",Kind="Table"]}[Data]
+				            in
+				                Table
+				```
+

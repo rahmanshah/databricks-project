@@ -1,0 +1,20 @@
+table dim_product
+
+	column product_id
+		dataType: string
+		sourceColumn: product_id
+
+	partition dim_product = m
+		mode: directQuery
+		source = ```
+				
+				            let
+				                Source = DatabricksMultiCloud.Catalogs(ServerHostname, HTTPPath, [Catalog=null, Database=null,
+				                    EnableAutomaticProxyDiscovery=null, EnableQueryResultDownload="1"]),
+				                Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				                Schema = Database{[Name="default",Kind="Schema"]}[Data],
+				                Table = Schema{[Name="dim_product",Kind="Table"]}[Data]
+				            in
+				                Table
+				```
+

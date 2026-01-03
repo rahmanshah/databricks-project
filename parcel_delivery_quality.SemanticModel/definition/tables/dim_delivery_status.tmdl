@@ -1,0 +1,20 @@
+table dim_delivery_status
+
+	column delivery_status
+		dataType: string
+		sourceColumn: delivery_status
+
+	partition dim_delivery_status = m
+		mode: directQuery
+		source = ```
+				
+				            let
+				                Source = DatabricksMultiCloud.Catalogs(ServerHostname, HTTPPath, [Catalog=null, Database=null,
+				                    EnableAutomaticProxyDiscovery=null, EnableQueryResultDownload="1"]),
+				                Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				                Schema = Database{[Name="default",Kind="Schema"]}[Data],
+				                Table = Schema{[Name="dim_delivery_status",Kind="Table"]}[Data]
+				            in
+				                Table
+				```
+

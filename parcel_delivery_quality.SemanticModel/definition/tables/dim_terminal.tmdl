@@ -1,0 +1,20 @@
+table dim_terminal
+
+	column terminal_id
+		dataType: string
+		sourceColumn: terminal_id
+
+	partition dim_terminal = m
+		mode: directQuery
+		source = ```
+				
+				            let
+				                Source = DatabricksMultiCloud.Catalogs(ServerHostname, HTTPPath, [Catalog=null, Database=null,
+				                    EnableAutomaticProxyDiscovery=null, EnableQueryResultDownload="1"]),
+				                Database = Source{[Name="postnord",Kind="Database"]}[Data],
+				                Schema = Database{[Name="default",Kind="Schema"]}[Data],
+				                Table = Schema{[Name="dim_terminal",Kind="Table"]}[Data]
+				            in
+				                Table
+				```
+
