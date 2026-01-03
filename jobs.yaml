@@ -1,0 +1,86 @@
+resources:
+  jobs:
+    Parcel_Delivery_Quality:
+      name: Parcel Delivery Quality
+      tasks:
+        - task_key: load_data
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/load_data
+            source: WORKSPACE
+        - task_key: clean_data
+          depends_on:
+            - task_key: load_data
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/clean_data
+            source: WORKSPACE
+        - task_key: transform_and_classify
+          depends_on:
+            - task_key: clean_data
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/transform_and_classify
+            source: WORKSPACE
+        - task_key: upsert_dimension_tables
+          depends_on:
+            - task_key: transform_and_classify
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/upsert_dimension_tables
+            source: WORKSPACE
+        - task_key: upsert_fact_table
+          depends_on:
+            - task_key: transform_and_classify
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/upsert_fact_table
+            source: WORKSPACE
+        - task_key: Generate_PowerBI_Report
+          depends_on:
+            - task_key: upsert_fact_table
+            - task_key: upsert_dimension_tables
+          power_bi_task:
+            tables:
+              - name: dim_delivery_status
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+              - name: dim_delivery_time
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+              - name: dim_product
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+              - name: dim_terminal
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+              - name: dim_transaction_ref
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+              - name: gold_parcel_delivery_quality
+                catalog: postnord
+                schema: default
+                storage_mode: IMPORT
+            warehouse_id: f9889b398405ad31
+            power_bi_model:
+              workspace_name: databricks_project
+              model_name: parcel_delivery_quality
+              storage_mode: IMPORT
+              authentication_method: OAUTH
+              overwrite_existing: false
+            connection_resource_name: powerbi_report
+            refresh_after_update: false
+        - task_key: update_watermark_table
+          depends_on:
+            - task_key: upsert_fact_table
+            - task_key: upsert_dimension_tables
+          notebook_task:
+            notebook_path: /Workspace/Users/rahman.shah@protonmail.ch/databricks-project/tasks/update_watermark_table
+            source: WORKSPACE
+      git_source:
+        git_url: https://github.com/rahmanshah/databricks-project
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED

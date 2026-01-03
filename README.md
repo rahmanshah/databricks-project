@@ -28,6 +28,6 @@ The final task was to generate a Power BI report for the "Parcel Delivery Qualit
 3. Upsert Fact Table
 4. Upsert Dimension Tables
 5. Update Watermark
-6. Generate Power BI report in Power BI Service
+6. Generate Power BI report in Power BI Service - [PowerBI Report](https://app.powerbi.com/links/q6JeU7A2cY?ctid=e0fd2e2c-4d5f-4cd3-98dc-2d69895120d7&pbi_source=linkShare)
 
 ---
