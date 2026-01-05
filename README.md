@@ -11,7 +11,6 @@ This repository contains Databricks notebooks located in the `tasks` folder. Eac
 - **Upsert Fact Table:** Notebooks for upserting records into the fact table.
 - **Upsert Dimension Tables:** Notebooks for upserting records into dimension tables.
 - **Update Watermark:** Scripts for updating the processing watermark.
-- **Analysis & Visualization:** Exploratory data analysis and visualizations to understand delivery quality metrics.
 
 ## Usage in Databricks Jobs
 
