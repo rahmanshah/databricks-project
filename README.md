@@ -5,7 +5,7 @@
 This repository contains Databricks notebooks located in the `tasks` folder. Each notebook addresses a specific step in the data pipeline for the "Parcel Delivery Quality" assignment.
 
 ## Notebooks in `tasks` Folder
-
+- **Load Data:** Notebooks for loading data into Databricks.
 - **Extract & Deduplicate Silver Data:** Notebooks for extracting and deduplicating data from Silver tables.
 - **Transform & Classify:** Scripts for transforming and classifying the data using Spark.
 - **Upsert Fact Table:** Notebooks for upserting records into the fact table.
